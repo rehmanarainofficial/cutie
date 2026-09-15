@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Happy Birthday HT! 🎂</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="customCursor">💗</div>
+    <div id="datePopup"></div>
+    <div id="topBar" class="hidden">
+      <div id="lifeCounter" class="hidden">❤️❤️❤️</div>
+      <h1 class="top-text">Cupcake Cutie🧁💗 2</h1>
+      <div id="topControls">
+        <button
+          class="top-control-btn"
+          onclick="refreshPage()"
+          onmouseover="playHover()"
+          title="Refresh / Restart Experience"
+        >
+          <span class="btn-icon">⟳</span>
+        </button>
+        <button
+          class="top-control-btn"
+          onclick="toggleFullscreen()"
+          onmouseover="playHover()"
+          title="Toggle Fullscreen"
+        >
+          <span class="btn-icon">⛶</span>
+        </button>
+      </div>
+    </div>
+    <div id="introScreen">
+      <h1 class="screen-text">Cupcake Cutie🧁💗 2</h1>
+    </div>
+    <div id="instructionScreen" class="hidden">
+      <div class="card-box">
+        <span style="font-size: 50px">🧁</span>
+        <h3 class="instruction-heading">Instructions!</h3>
+        <ul class="instruction-list" id="instructionList">
+          <li>You must answer 5 questions correctly to proceed.</li>
+          <li>Be careful! You only have three lives.</li>
+          <li>Lose all lives and the program will restart.</li>
+          <li>Answer correctly to unlock the surprise.</li>
+        </ul>
+        <button
+          id="proceedBtn"
+          class="instruction-btn"
+          onmouseover="playHover()"
+          onclick="handleProceedClick()"
+        >
+          Skip and Proceed
+        </button>
+      </div>
+    </div>
+    <div id="transitionScreen" class="hidden">
+      <h1 id="transitionText" class="screen-text"></h1>
+    </div>
+    <div class="box hidden" id="quizBox">
+      <h2 id="qNumber"></h2>
+      <p id="question"></p>
+      <div id="options"></div>
+    </div>
+    <div id="errorPage" class="hidden">
+      <div class="card-box">
+        <span class="restart-icon">🥺</span>
+        <p class="error-text">Identity Verification Failed</p>
+        <p style="color: #666; margin-bottom: 20px">
+          You are someone else. Wish to start again?
+        </p>
+        <button
+          class="restart-btn"
+          onmouseover="playHover()"
+          onclick="handleRestartClick()"
+        >
+          Try Again 🔄
+        </button>
+      </div>
+    </div>
+    <!-- NEW: Program says notifications now appear as full-screen cards (exactly like the restart/error screen) -->
+    <div id="notificationScreen" class="hidden">
+      <div class="card-box">
+        <span id="notificationIcon" class="restart-icon">🧁</span>
+        <p id="notificationText" class="error-text"></p>
+        <p
+          id="notificationSubtext"
+          style="color: #666; margin-bottom: 20px"
+        ></p>
+        <button
+          class="restart-btn"
+          onmouseover="playHover()"
+          onclick="dismissNotification()"
+        >
+          OK 🐼
+        </button>
+      </div>
+    </div>
+    <div id="birthdayPage" class="hidden birthday">
+      <div class="sparkles"></div>
+      <div id="clickPromptContainer">
+        <div id="clickPrompt">Click Any Image</div>
+      </div>
+
+      <div id="imageCollection">
+        <div
+          class="img-wrapper left img1 img-purple"
+          onclick="handleImageClick(0)"
+        >
+          <img
+            id="main-img-0"
+            src="images/img1.webp"
+            class="side-img"
+            loading="lazy"
+            onmouseover="playHover()"
+          />
+          <div class="date-overlay" id="date-0">14 August 2026</div>
+        </div>
+        <div
+          class="img-wrapper left img2 img-orange"
+          onclick="handleImageClick(1)"
+        >
+          <img
+            id="main-img-1"
+            src="images/img2.webp"
+            class="side-img"
+            loading="lazy"
+            onmouseover="playHover()"
+          />
+          <div class="date-overlay" id="date-1">28 April 2024</div>
+        </div>
+        <div
+          class="img-wrapper right img1 img-hotpink"
+          id="img-right-top"
+          onclick="handleImageClick(2)"
+        >
+          <img
+            id="main-img-2"
+            src="images/img3.webp"
+            class="side-img"
+            loading="lazy"
+            onmouseover="playHover()"
+          />
+          <div class="date-overlay" id="date-2">25 May 2024</div>
+        </div>
+        <div
+          class="img-wrapper right img2 img-red"
+          id="img-right-bottom"
+          onclick="handleImageClick(3)"
+        >
+          <img
+            id="main-img-3"
+            src="images/img4.webp"
+            class="side-img"
+            loading="lazy"
+            onmouseover="playHover()"
+          />
+          <div class="date-overlay" id="date-3">14 August 2008</div>
+        </div>
+      </div>
+      <div class="top-mode">
+        <div class="card" id="birthdayCard">
+          <div class="confetti-container" id="confetti"></div>
+          <h1 id="birthdayHeading">Happy Birthday! 🎂</h1>
+          <div class="text-area" id="typingArea"></div>
+        </div>
+      </div>
+      <button
+        id="secretOption"
+        class="secret-btn hidden"
+        onmouseover="playHover()"
+        onclick="handleSecretClick()"
+      >
+        Secret Image
+      </button>
+      <button
+        id="skipConvoBtn"
+        class="secret-btn hidden"
+        onmouseover="playHover()"
+        onclick="handleSkipConvoClick()"
+      >
+        Skip Convo
+      </button>
+      <div id="finalImageContainer" class="hidden">
+        <div class="blue-glow-img-wrapper" onclick="handleHiddenImageClick()">
+          <img
+            id="hidden-img"
+            src="images/hidden.webp"
+            class="side-img"
+            loading="lazy"
+            onmouseover="playHover()"
+          />
+          <div class="date-overlay">Secret Message</div>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
